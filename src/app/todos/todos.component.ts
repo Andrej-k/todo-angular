@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 
+
 @Component({
     selector: 'todos',
     templateUrl: 'todos.component.html',
@@ -9,21 +10,37 @@ import {Component} from '@angular/core';
 export class TodosComponent {
 
     newTodo:string;
+    id:number;
+    details:string;
     todos:any;
     todoObj:any;
 
     constructor() {
         this.newTodo = '';
+        this.details = '';
+        this.id = 0;
         this.todos = [];
+    }
+
+    selectedItem: Item = {
+        id: this.id,
+        name: this.newTodo,
+        details: this.details
+    };
+
+    onSelect(selectedItem: Item): void {
+        this.selectedItem = selectedItem;
     }
 
     addTodo(event) {
         this.todoObj = {
             newTodo: this.newTodo,
+            id: this.id,
             completed: false
-        }
+        };
         this.todos.push(this.todoObj);
         this.newTodo = '';
+        this.id++;
         event.preventDefault();
     }
 

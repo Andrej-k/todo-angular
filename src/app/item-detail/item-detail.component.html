@@ -1,0 +1,14 @@
+
+
+<h2>{{ selectedItem.newTodo | uppercase }} Details</h2>
+<div><span>id: </span>{{selectedItem.id}}</div>
+<div><span>name: </span>{{selectedItem.newTodo}}</div>
+<div><span>details: </span>{{selectedItem.details}}</div>
+
+<div>
+    <label>details:</label>
+    <input [(ngModel)]="selectedItem.details" placeholder="details">
+</div>
+
+<button (click)="goBack()">go back</button>
+
