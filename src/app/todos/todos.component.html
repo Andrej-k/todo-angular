@@ -1,29 +1,20 @@
-
 <div class="todos">
 
     <div>
         <form (submit)="addTodo($event)">
             <input [(ngModel)]="newTodo" (keyup.enter)="newTodo=''" class="textfield" name="newTodo">
-            <button type="submit" [disabled]="newTodo===''">Add Todo</button>
+            <!--<button type="submit" [disabled]="newTodo===''">Add Todo</button>-->
         </form>
     </div>
 
-    <div [hidden]="newTodo">
-        Type in a new todo...
-    </div>
-
-    <div [hidden]="!newTodo">
-        <!-- Another two-way binding example -->
-        Typing: {{ newTodo }}
-    </div>
-
-    <ul>
-        <li *ngFor="let todo of todos; let i=index" (click)="onSelect(todo)" [class.selected]="todo === selectedItem"
-       >
+    <ul class="todo-list">
+        <li *ngFor="let todo of this.itemService.todos; let i=index">
             <input type="checkbox" class="checkbox" [(ngModel)]="todo.completed"/>
-            <span [ngClass]="{'checked': todo.completed}">{{ todo.id }}</span>
-            <span [ngClass]="{'checked': todo.completed}">{{ todo.newTodo }}</span>
-            <span (click)="deleteTodo(i)" class="delete-icon">[X]</span>
+            <a routerLink="/detail/{{todo.id}}">
+                <span [ngClass]="{'checked': todo.completed}">{{ todo.id }}</span>
+                <span [ngClass]="{'checked': todo.completed}">{{ todo.newTodo }}</span>
+            </a>
+            <span (click)="deleteTodo(i)" class="delete-icon"><i class="fa fa-times" aria-hidden="true"></i></span>
         </li>
     </ul>
 
@@ -32,5 +23,3 @@
     </div>
 
 </div>
-
-<app-item-detail [selectedItem]="selectedItem" ></app-item-detail>

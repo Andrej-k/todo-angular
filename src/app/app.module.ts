@@ -7,6 +7,7 @@ import { TodosComponent } from './todos/todos.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
 
 import { AppRoutingModule } from './app-routing.module';
+import {ItemService} from "./item.service";
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { AppRoutingModule } from './app-routing.module';
         TodosComponent,
         ItemDetailComponent
     ],
-    providers: [],
+    providers: [ ItemService ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

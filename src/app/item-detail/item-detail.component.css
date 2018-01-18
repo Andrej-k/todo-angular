@@ -1,0 +1,56 @@
+.details-content{
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    background: #3d4142;
+    padding: 30px 40px;
+    text-align: left;
+    border-radius: 75px;
+}
+
+h2{
+    font-size: 30px;
+}
+
+.details div{
+    padding: 5px 0;
+    font-size: 20px;
+}
+
+.details-edit{
+    margin-top: 20px;
+}
+
+.details-edit label{
+    display: block;
+    margin-bottom: 10px;
+}
+
+.details-edit textarea{
+    display: block;
+    background: transparent;
+    border: 1px solid #555151;
+    outline: none;
+    color: #fff;
+    padding: 10px;
+}
+button {
+    border-radius: 50px;
+    height: 50px;
+    display: block;
+    font-weight: 700;
+    margin: 50px auto;
+    text-transform: uppercase;
+    color: #fff;
+    border: 0;
+    outline: none;
+    padding: 0 20px;
+    font-size: 20px;
+    font-family: Rubik, sans-serif;
+    text-shadow: 1px 1px 1px #ccc;
+    cursor: pointer;
+    background: -moz-linear-gradient(left, #22fe05 1%, #00e2ff 80%);
+    background: -webkit-linear-gradient(left, #22fe05 1%,#00e2ff 80%);
+    background: linear-gradient(to right, #22fe05 1%,#00e2ff 80%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#22fe05', endColorstr='#00e2ff',GradientType=1 );
+}

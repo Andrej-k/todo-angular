@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {Item} from "../item";
+import {ItemService} from "../item.service";
 
 
 @Component({
@@ -7,29 +9,22 @@ import {Component} from '@angular/core';
     styleUrls: ['./todos.component.css']
 })
 
-export class TodosComponent {
+export class TodosComponent{
 
-    newTodo:string;
-    id:number;
-    details:string;
-    todos:any;
-    todoObj:any;
+    currentId: number;
+    currentItem: string;
+    newTodo: string;
+    id: number;
+    todoObj: any;
 
-    constructor() {
+
+    constructor(private itemService: ItemService) {
         this.newTodo = '';
-        this.details = '';
-        this.id = 0;
-        this.todos = [];
-    }
-
-    selectedItem: Item = {
-        id: this.id,
-        name: this.newTodo,
-        details: this.details
-    };
-
-    onSelect(selectedItem: Item): void {
-        this.selectedItem = selectedItem;
+        this.id = 1;
+        this.currentId = (localStorage.getItem('currentId')!==null) ? JSON.parse(localStorage.getItem('currentId')) : [ 1 ];
+        this.id = this.currentId;
+        // this.currentItem = (localStorage.getItem('currentItem')!==null) ? JSON.parse(localStorage.getItem('currentItem')) : [  ];
+        // this.itemService.todos = this.currentItem;
     }
 
     addTodo(event) {
@@ -38,21 +33,23 @@ export class TodosComponent {
             id: this.id,
             completed: false
         };
-        this.todos.push(this.todoObj);
+        this.itemService.todos.push(this.todoObj);
+        console.log(this.itemService.todos);
         this.newTodo = '';
         this.id++;
+        localStorage.setItem('currentId', JSON.stringify(this.id));
+        localStorage.setItem('currentItem', JSON.stringify(this.itemService.todos));
         event.preventDefault();
     }
 
     deleteTodo(index) {
-        this.todos.splice(index, 1);
+        this.itemService.todos.splice(index, 1);
     }
 
     deleteSelectedTodos() {
-        //need ES5 to reverse loop in order to splice by index
-        for (var i = (this.todos.length - 1); i > -1; i--) {
-            if (this.todos[i].completed) {
-                this.todos.splice(i, 1);
+        for (var i = (this.itemService.todos.length - 1); i > -1; i--) {
+            if (this.itemService.todos[i].completed) {
+                this.itemService.todos.splice(i, 1);
             }
         }
     }

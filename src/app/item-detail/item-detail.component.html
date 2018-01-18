@@ -1,14 +1,15 @@
+<div *ngIf="item" class="details-content">
+    <h2>{{ item.newTodo | uppercase }}</h2>
+    <div class="details">
+        <div><span>ID: </span>{{item.id}}</div>
+        <div><span>NAME: </span>{{item.newTodo}}</div>
+        <div><span>DETAILS: </span>{{item.details}}</div>
+    </div>
 
+    <div class="details-edit">
+        <label>EDIT DETAILS:</label>
+        <textarea rows="5" cols="50" [(ngModel)]="item.details" placeholder="details"></textarea>
+    </div>
 
-<h2>{{ selectedItem.newTodo | uppercase }} Details</h2>
-<div><span>id: </span>{{selectedItem.id}}</div>
-<div><span>name: </span>{{selectedItem.newTodo}}</div>
-<div><span>details: </span>{{selectedItem.details}}</div>
-
-<div>
-    <label>details:</label>
-    <input [(ngModel)]="selectedItem.details" placeholder="details">
+    <button (click)="goBack()">go back</button>
 </div>
-
-<button (click)="goBack()">go back</button>
-

@@ -1,7 +1,8 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {TodosComponent} from './../todos/todos.component';
-import { ActivatedRoute } from '@angular/router';
+import { Item } from '../item';
+import {ActivatedRoute} from '@angular/router';
 import { Location } from '@angular/common';
+import { ItemService }  from '../item.service';
 
 @Component({
     selector: 'app-item-detail',
@@ -15,36 +16,26 @@ export class ItemDetailComponent implements OnInit {
     id:number;
     details:string;
 
-    @Input() selectedItem: Item = {
+    @Input() item: Item = {
         id: this.id,
-        name: this.newTodo,
+        newTodo: this.newTodo,
         details: this.details
     };
 
-    constructor() {
-        this.newTodo = '';
-        this.details = '';
-        this.id = 0;
+    constructor(private route: ActivatedRoute, private itemService: ItemService, private location: Location) {}
+
+    ngOnInit(): void {
+        this.getData();
     }
 
-    // constructor(
-    //     private route: ActivatedRoute,
-    //     private location: Location
-    // ) {}
-
-
-    ngOnInit() {
-
+    getData(): void {
+        const id = +this.route.snapshot.paramMap.get('id');
+        this.itemService.getData(id)
+            .subscribe(item => this.item = item);
     }
 
-    // getHero(): void {
-    //     const id = +this.route.snapshot.paramMap.get('id');
-    //     this.heroService.getHero(id)
-    //         .subscribe(hero => this.hero = hero);
-    // }
-
-    // goBack(): void {
-    //     this.location.back();
-    // }
+    goBack(): void {
+        this.location.back();
+    }
 
 }
